@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { Dimensions, Platform } from 'react-native';
+import { Dimensions, Platform, TouchableOpacityProps } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 export const Container = styled.SafeAreaView`
@@ -29,7 +29,7 @@ export const SubTitle = styled.Text`
   font-family: ${(props) => props.theme.fonts.text};
 `;
 
-export const StyledButton = styled.TouchableOpacity<any>`
+export const StyledButton = styled.TouchableOpacity<TouchableOpacityProps>`
   background-color: ${(props) => props.theme.colors.green};
   justify-content: center;
   align-items: center;

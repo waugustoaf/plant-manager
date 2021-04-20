@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/core';
 import { Platform } from 'react-native';
 import Button from '../../components/Button';
 import {
@@ -12,8 +13,15 @@ import {
 } from './styles';
 
 const UserIdentification: React.FC = () => {
+  const navigation = useNavigation();
+
   const [isEmpty, setIsEmpty] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
+
+  function handleSubmit() {
+    console.log('Saving name...'); // TODO
+    navigation.navigate('Confirmation');
+  }
 
   function handleInput() {
     setIsFocused((value) => !value);
@@ -41,7 +49,9 @@ const UserIdentification: React.FC = () => {
           />
 
           <FormFooter>
-            <Button isEmpty={isEmpty}>Confirmar</Button>
+            <Button onPress={handleSubmit} isEmpty={isEmpty}>
+              Confirmar
+            </Button>
           </FormFooter>
         </Form>
       </KeyboardContainer>

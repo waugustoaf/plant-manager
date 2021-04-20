@@ -1,4 +1,6 @@
+import { useNavigation } from '@react-navigation/core';
 import React from 'react';
+import wateringImg from '../../assets/watering.png';
 import {
   ButtonIcon,
   Container,
@@ -7,9 +9,14 @@ import {
   SubTitle,
   Title,
 } from './styles';
-import wateringImg from '../../assets/watering.png';
 
 const Welcome: React.FC = () => {
+  const navigation = useNavigation();
+
+  function handleStart() {
+    navigation.navigate('UserIdentification');
+  }
+
   return (
     <Container>
       <Title>
@@ -25,7 +32,7 @@ const Welcome: React.FC = () => {
         Nós cuidamos de lembrar você sempre que precisar.
       </SubTitle>
 
-      <StyledButton>
+      <StyledButton onPress={handleStart}>
         <ButtonIcon name='chevron-right' />
       </StyledButton>
     </Container>
