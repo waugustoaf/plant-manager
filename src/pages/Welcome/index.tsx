@@ -1,28 +1,33 @@
-import React from "react";
-import { Container, Image, SubTitle, Title } from "./styles";
-
-import { FiChevronRight } from "react-icons/fi";
-
-import wateringImg from "../../assets/watering.png";
-import Button from "../../components/Button";
+import React from 'react';
+import {
+  ButtonIcon,
+  Container,
+  Image,
+  StyledButton,
+  SubTitle,
+  Title,
+} from './styles';
+import wateringImg from '../../assets/watering.png';
 
 const Welcome: React.FC = () => {
   return (
     <Container>
       <Title>
         Gerencie {`\n`}
-        suas plantas {`\n`}
-        de forma fácil
+        suas plantas de {`\n`}
+        forma fácil
       </Title>
 
-      <Image source={wateringImg} />
+      <Image source={wateringImg} resizeMode='contain' />
 
       <SubTitle>
-        Não esqueça de regar suas plantas. Nós cuidamos de lembrar você sempre
-        que precisar.
+        Não esqueça de regar suas plantas. {'\n'}
+        Nós cuidamos de lembrar você sempre que precisar.
       </SubTitle>
 
-      <Button>{`>`}</Button>
+      <StyledButton>
+        <ButtonIcon name='chevron-right' />
+      </StyledButton>
     </Container>
   );
 };

@@ -1,11 +1,16 @@
-import React from "react";
-import { StyledButton, ButtonText } from "./styles";
+import React from 'react';
+import { TouchableOpacityProps } from 'react-native';
+import { ButtonText, Container } from './styles';
 
-const Button: React.FC = ({ children }) => {
+export interface ButtonProps extends TouchableOpacityProps {
+  isEmpty?: boolean;
+}
+
+const Button: React.FC<ButtonProps> = ({ children, isEmpty, ...rest }) => {
   return (
-    <StyledButton activeOpacity={0.8}>
+    <Container {...rest} isEmpty={isEmpty}>
       <ButtonText>{children}</ButtonText>
-    </StyledButton>
+    </Container>
   );
 };
 
