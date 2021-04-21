@@ -4,7 +4,6 @@ import { Feather } from '@expo/vector-icons';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
-  padding: ${Platform.OS === 'ios' ? 0 : '52px 10px 10px 10px'};
   align-items: center;
   justify-content: space-around;
 `;

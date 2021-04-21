@@ -9,8 +9,8 @@ import AppLoading from 'expo-app-loading';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import Theme from './src/styles/theme';
-import StackRoutes from './src/routes/stack.routes';
 import Routes from './src/routes';
+import { SafeView } from './src/styles/pageAreaView';
 
 export default function App() {
   const [fontJost] = useFonts({
@@ -22,9 +22,11 @@ export default function App() {
   if (!fontJost) return <AppLoading />;
 
   return (
-      <Theme>
+    <Theme>
+      <SafeView>
         <Routes />
-        <StatusBar backgroundColor='#FFFFFF' />
-      </Theme>
+      </SafeView>
+      <StatusBar backgroundColor='#FFFFFF' />
+    </Theme>
   );
 }

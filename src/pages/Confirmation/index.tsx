@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
-import { Platform } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
+import React, { useCallback } from 'react';
 import Button from '../../components/Button';
-import { Container, Emoji, Form, FormFooter, Title, Text } from './styles';
+import { Container, Emoji, Form, FormFooter, Text, Title } from './styles';
 
 const Confirmation: React.FC = () => {
+  const navigation = useNavigation();
+
+  const handleMoveOn = useCallback(() => {
+    navigation.navigate('PlantSelect');
+  }, []);
+
   return (
     <Container>
       <Form>
@@ -16,7 +22,7 @@ const Confirmation: React.FC = () => {
         </Text>
 
         <FormFooter>
-          <Button>Começar</Button>
+          <Button onPress={handleMoveOn}>Começar</Button>
         </FormFooter>
       </Form>
     </Container>

@@ -9,7 +9,6 @@ interface InputProps {
 export const Container = styled.SafeAreaView`
   flex: 1;
   width: 100%;
-  padding: ${Platform.OS === 'ios' ? 0 : '52px 0px 20px 0px'};
   justify-content: space-around;
   align-items: center;
 `;
@@ -17,7 +16,6 @@ export const Container = styled.SafeAreaView`
 export const KeyboardContainer = styled.KeyboardAvoidingView`
   flex: 1;
   width: 100%;
-  padding: ${Platform.OS === 'ios' ? 0 : '52px 0px 20px 0px'};
   justify-content: space-around;
   align-items: center;
 `;

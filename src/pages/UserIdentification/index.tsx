@@ -19,7 +19,8 @@ const UserIdentification: React.FC = () => {
   const [isFocused, setIsFocused] = useState(false);
 
   function handleSubmit() {
-    console.log('Saving name...'); // TODO
+    if(isEmpty) return;
+    // TODO
     navigation.navigate('Confirmation');
   }
 
