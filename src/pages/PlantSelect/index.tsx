@@ -1,9 +1,12 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/core';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Text } from 'react-native';
 import { EnvironmentButton as Button } from '../../components/EnvironmentButton';
 import { Header } from '../../components/Header';
 import { Load } from '../../components/Load';
 import { PlantCardPrimary } from '../../components/PlantCardPrimary';
+import { PlantProps } from '../../libs/storage';
 import { api } from '../../services/api';
 import { Container, Title, SubTitle, FlatView, PlantsView } from './styles';
 
@@ -12,20 +15,9 @@ interface EnvironmentProps {
   title: string;
 }
 
-interface PlantProps {
-  id: number;
-  name: string;
-  about: string;
-  water_tips: string;
-  photo: string;
-  environments: [string];
-  frequency: {
-    times: number;
-    repeat_every: string;
-  };
-}
-
 export const PlantSelect: React.FC = () => {
+  const navigation = useNavigation();
+
   const [environments, setEnvironments] = useState<EnvironmentProps[]>([]);
   const [environmentSelected, setEnvironmentSelected] = useState('all');
   const [plants, setPlants] = useState<PlantProps[]>([]);
@@ -34,6 +26,8 @@ export const PlantSelect: React.FC = () => {
   const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
   const [loadedAll, setLoadedAll] = useState(false);
+
+  const [username, setUsername] = useState('');
 
   const handleEnvironmentSelected = useCallback(
     (environment: string) => {
@@ -83,12 +77,19 @@ export const PlantSelect: React.FC = () => {
     setLoadingMore(false);
   }, [page, plants, filteredPlants, loadedAll]);
 
+  const handlePlantSelect = useCallback((plant: PlantProps) => {
+    navigation.navigate('PlantSave', { plant });
+  }, []);
+
   useEffect(() => {
     (async () => {
       const { data } = await await api.get(
         '/plants_environments?_sort=title&_order=asc'
       );
       setEnvironments([{ key: 'all', title: 'Todos' }, ...data]);
+
+      const username = await AsyncStorage.getItem('@plantmanager:user');
+      setUsername(username || '');
     })();
   }, []);
 
@@ -102,7 +103,7 @@ export const PlantSelect: React.FC = () => {
 
   return (
     <Container>
-      <Header lineTop='Olá,' lineBottom='Walther' />
+      <Header lineTop='Olá,' lineBottom={username} />
 
       <Title>Em qual ambiente</Title>
       <SubTitle>você quer colocar sua planta?</SubTitle>
@@ -113,7 +114,8 @@ export const PlantSelect: React.FC = () => {
           renderItem={({ item }) => (
             <Button
               active={item.key === environmentSelected}
-              onPress={() => handleEnvironmentSelected(item.key)}>
+              onPress={() => handleEnvironmentSelected(item.key)}
+            >
               {item.title}
             </Button>
           )}
@@ -127,7 +129,10 @@ export const PlantSelect: React.FC = () => {
         <FlatList
           data={filteredPlants}
           renderItem={({ item }) => (
-            <PlantCardPrimary data={{ name: item.name, photo: item.photo }} />
+            <PlantCardPrimary
+              data={{ name: item.name, photo: item.photo }}
+              onPress={() => handlePlantSelect(item)}
+            />
           )}
           showsVerticalScrollIndicator={false}
           numColumns={2}

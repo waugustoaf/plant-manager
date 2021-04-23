@@ -26,12 +26,6 @@ export const FlatView = styled.View`
   padding: 32px 5px;
 `;
 
-export const Middler = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
-
 export const PlantsView = styled.View`
   flex: 1;
   justify-content: space-between;

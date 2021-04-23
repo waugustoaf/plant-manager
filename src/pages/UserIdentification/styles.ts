@@ -1,4 +1,3 @@
-import { Dimensions, Platform } from 'react-native';
 import styled from 'styled-components/native';
 
 interface InputProps {

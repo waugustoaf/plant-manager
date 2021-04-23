@@ -6,8 +6,3 @@ export const Middler = styled.View`
   justify-content: center;
   align-items: center;
 `;
-
-export const Animation = styled(LottieView)`
-  background-color: transparent;
-  width: 200px;
-`;
