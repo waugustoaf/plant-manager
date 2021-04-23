@@ -40,3 +40,7 @@ export const PlantsTitle = styled.Text`
   color: ${(props) => props.theme.colors.heading};
   margin: 20px 0;
 `;
+
+export const PlantsView = styled.View`
+  flex: 1;
+`;

@@ -35,7 +35,9 @@ const StackRoutes: React.FC = () => {
           backgroundColor: '#FFF',
         },
       }}
-      initialRouteName={username ? 'TabRoutes' : 'Welcome'}
+      initialRouteName={
+        !!username && username !== null ? 'TabRoutes' : 'Welcome'
+      }
     >
       <stackRoutes.Screen name='Welcome' component={Welcome} />
       <stackRoutes.Screen

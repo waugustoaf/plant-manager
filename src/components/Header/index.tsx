@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Container, Image, TextBottom, TextsView, TextTop } from './styles';
 
 interface HeaderProps {
@@ -7,8 +7,18 @@ interface HeaderProps {
 }
 
 import userImg from '../../assets/walther.jpeg';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/core';
 
 export const Header: React.FC<HeaderProps> = ({ lineTop, lineBottom }) => {
+  const navigation = useNavigation();
+
+  const handleRemoveUser = useCallback(async () => {
+    await AsyncStorage.removeItem('@plantmanager:user');
+    navigation.navigate('Welcome');
+  }, []);
+
   return (
     <Container>
       <TextsView>
@@ -16,7 +26,9 @@ export const Header: React.FC<HeaderProps> = ({ lineTop, lineBottom }) => {
         <TextBottom>{lineBottom}</TextBottom>
       </TextsView>
 
-      <Image source={userImg} />
+      <TouchableWithoutFeedback onPress={handleRemoveUser}>
+        <Image source={userImg} />
+      </TouchableWithoutFeedback>
     </Container>
   );
 };

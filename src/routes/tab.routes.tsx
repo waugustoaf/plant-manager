@@ -24,6 +24,7 @@ export const TabRoutes: React.FC = () => {
         name='Minhas Plantas'
         component={MyPlants}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({ size, color }) => (
             <MaterialIcons
               name='format-list-bulleted'

@@ -7,10 +7,12 @@ import {
 } from '@expo-google-fonts/jost';
 import AppLoading from 'expo-app-loading';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Theme from './src/styles/theme';
 import Routes from './src/routes';
 import { SafeView } from './src/styles/pageAreaView';
+import * as Notifications from 'expo-notifications';
+import { PlantProps } from './src/libs/storage';
 
 export default function App() {
   const [fontJost] = useFonts({
